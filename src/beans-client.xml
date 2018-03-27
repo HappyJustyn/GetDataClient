@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+   xmlns:jaxws="http://cxf.apache.org/jaxws"  
+   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://cxf.apache.org/jaxws http://cxf.apache.org/jaxws">  
+    
+    
+   <!-- 引cxf的一些核心配置,cxf-3.0.0之后不需要 -->  
+   <!-- <import resource="classpath:META-INF/cxf/cxf.xml" />
+   <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+   <import resource="classpath:META-INF/cxf/cxf-servlet.xml" /> -->   
+     
+   <!-- CXF webservices 客户端配置 -->
+    <jaxws:client id="getDataClient" serviceClass="com.test.service.GetData"     
+            address="http://localhost/GetDataService/WS/getDataWS?wsdl">
+            
+	   <!-- 输入拦截器 -->  
+	   <jaxws:inInterceptors>  
+	      <bean class="org.apache.cxf.interceptor.LoggingInInterceptor"></bean>
+	   </jaxws:inInterceptors>
+	   <!-- 输出拦截器 -->  
+	   <jaxws:outInterceptors>
+	      <!-- <bean class="com.test.interceptor.LoginInterceptor"></bean> -->
+	      <bean class="org.apache.cxf.interceptor.LoggingOutInterceptor"></bean>
+	   </jaxws:outInterceptors>
+             
+    </jaxws:client>
+       
+</beans> 
